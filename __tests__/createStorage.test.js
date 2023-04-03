@@ -3,7 +3,13 @@ import 'jest-dom/extend-expect';
 import createStorage from '../src/createStorage';
 
 const mockStorage = {
-  getItem: (key) => (key === null ? null : JSON.stringify(key)),
+  // create tenary operator to check if key is null, key is a promise, or key is a string
+  getItem: (key) =>
+    key === null
+      ? null
+      : key instanceof Promise
+      ? Promise.resolve(key)
+      : JSON.stringify(key),
   setItem: () => {},
 };
 class Provider {

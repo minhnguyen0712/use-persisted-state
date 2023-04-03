@@ -7,6 +7,10 @@ const getProvider = () => {
   if (typeof global !== 'undefined' && global.localStorage) {
     return global.localStorage;
   }
+  // async storage in react native
+  if (typeof global !== 'undefined' && global.AsyncStorage) {
+    return global.AsyncStorage;
+  }
   // eslint-disable-next-line no-undef
   if (typeof globalThis !== 'undefined' && globalThis.localStorage) {
     // eslint-disable-next-line no-undef
@@ -18,6 +22,7 @@ const getProvider = () => {
   if (typeof localStorage !== 'undefined') {
     return localStorage;
   }
+
   return null;
 };
 
